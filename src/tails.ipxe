@@ -1,0 +1,25 @@
+#!ipxe
+
+# Tails
+# https://tails.boum.org/
+
+goto ${menu}
+
+:tails
+set os Tails
+menu ${os}
+item --gap Official Releases
+item 3.0~alpha1 ${space} ${os} 3.0~alpha1
+choose tails_version || goto tails_exit
+goto tails_boot
+
+:tails_boot
+set tails_initrd http://27.dl.amnesia.boum.org/tails/alpha/tails-amd64-${tails_version}/tails-amd64-${tails_version}.iso
+kernel ${memdisk} iso raw
+initrd ${tails_initrd}
+boot
+goto tails_exit
+
+:tails_exit
+clear menu
+exit 0
