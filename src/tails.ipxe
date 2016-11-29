@@ -14,7 +14,7 @@ choose tails_version || goto tails_exit
 goto tails_boot
 
 :tails_boot
-set tails_initrd http://27.dl.amnesia.boum.org/tails/alpha/tails-amd64-${tails_version}/tails-amd64-${tails_version}.iso
+set tails_initrd http://tails.mirror.iphh.net/tails/alpha/tails-amd64-${tails_version}/tails-amd64-${tails_version}.iso
 kernel ${memdisk} iso raw
 initrd ${tails_initrd}
 boot
