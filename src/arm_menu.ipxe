@@ -1,0 +1,61 @@
+#!ipxe
+
+goto ${menu} ||
+
+:arm_menu
+menu ${site_name}
+item --gap Default:
+item local ${space} Boot from local hdd
+item --gap arm64 Operating Systems:
+item centos ${space} CentOS 
+item debian ${space} Debian
+item fedora ${space} Fedora
+item opensuse ${space} openSUSE
+item rhel ${space} Red Hat Enterprise Linux
+item ubuntu ${space} Ubuntu
+item --gap Tools:
+item shell ${space} iPXE shell
+item netinfo ${space} Network card info
+choose menu || goto local
+echo ${cls}
+goto ${menu} ||
+iseq ${sigs_enabled} true && goto verify_sigs || goto change_menu
+
+:verify_sigs
+imgverify ${menu}.ipxe ${sigs}${menu}.ipxe.sig || goto error
+goto change_menu
+
+:change_menu
+chain ${menu}.ipxe || goto error
+goto arm_menu
+
+:error
+echo Error occured, press any key to return to menu ...
+prompt
+goto arm_menu
+
+:local
+echo Booting from local disks ...
+exit 0
+
+:shell
+echo Type "exit" to return to menu.
+set menu arm_menu
+shell
+goto arm_menu
+
+:changebits
+iseq ${arch} x86_64 && set arch i386 || set arch x86_64
+goto arm_menu
+
+:sig_check
+iseq ${sigs_enabled} true && set sigs_enabled false || set sigs_enabled true
+goto arm_menu
+
+:img_sigs_check
+iseq ${img_sigs_enabled} true && set img_sigs_enabled false || set img_sigs_enabled true
+goto arm_menu4
+
+:nbxyz-custom
+chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/custom.ipxe || goto error
+goto arm_menu
