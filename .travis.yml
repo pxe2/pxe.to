@@ -23,4 +23,4 @@ after_deploy:
   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID_BOOT --paths "/*"
 notifications:
   email:
-    - antony@mes.ser.li
+    - peter@pouliot.net
