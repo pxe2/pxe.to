@@ -67,9 +67,9 @@ properly.
 Let's boot a new instance with this ISO:
 
     nova boot --flavor m1.small \
-        --image <image-uuid-of-netbootxyz-image> \
+        --image <image-uuid-of-pxe2-image> \
         --nic net-id=<network-uuid> \
-        netbootxyz-testing
+        pxe2-testing
 
 Wait about 30 seconds, then request a console URL:
 
