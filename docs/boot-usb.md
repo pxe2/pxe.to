@@ -2,9 +2,9 @@
 
 *Warning: Backup your important data before using USB as it will overwrite anything on the USB key.*
 
-Download a netboot.xyz USB disk:
+Download a pxe.to USB disk:
 
-* [netboot.xyz](https://boot.netboot.xyz/ipxe/netboot.xyz.usb) 
+* [pxe.to](https://boot.pxe.to/ipxe/pxe.to.usb) 
 
 ## Creating USB Key on Linux
 
@@ -44,7 +44,7 @@ __Run:__
 
 __Execute:__
 
-    sudo dd if=netboot.xyz.usb of=/dev/rdiskN bs=1m
+    sudo dd if=pxe.to.usb of=/dev/rdiskN bs=1m
 
 * Using /dev/rdisk instead of /dev/disk may be faster
 * If you see the error dd: Invalid number '1m', you are using GNU dd. Use the same command but replace bs=1m with bs=1M
@@ -62,4 +62,4 @@ Check out [Rufus](https://rufus.akeo.ie/) to install the ISO file to a USB key.
 
 ### Booting
 
-Once you've created your key, reboot and set your BIOS to load the USB key first if it's not set for that already. You should see iPXE load up either load up netboot.xyz automatically or prompt you to set your networking information up.
+Once you've created your key, reboot and set your BIOS to load the USB key first if it's not set for that already. You should see iPXE load up either load up pxe.to automatically or prompt you to set your networking information up.

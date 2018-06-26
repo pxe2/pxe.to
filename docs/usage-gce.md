@@ -1,6 +1,6 @@
 # Google Compute Engine (GCE)
 
-## Using with netboot.xyz
+## Using with pxe.to
 
 **Experimental, currently doesn't work on any images that utilize memdisk as console output cannot be altered.**
 
@@ -10,7 +10,7 @@
 
 Set a name for your bucket and select the regional storage class.
 
-Upload the netboot.xyz-gce image from this [link](https://boot.netboot.xyz/ipxe/netboot.xyz-gce.tar.gz) to the root of your bucket.
+Upload the pxe.to-gce image from this [link](https://boot.pxe.to/ipxe/pxe.to-gce.tar.gz) to the root of your bucket.
 
     gsutil cp $tmp/$image_name.tar.gz gs://$gs_bucket
 
@@ -30,7 +30,7 @@ Start an instance from the image you created, make sure to enable the serial-por
 
     gcloud beta compute connect-to-serial-port $instance_name
 
-From here you should see the netboot.xyz menu and that's probably all you'll be able to do at this point. :)
+From here you should see the pxe.to menu and that's probably all you'll be able to do at this point. :)
 
 ### Configuring the Instance
 
@@ -52,7 +52,7 @@ To get the installers to work to output serial, when the GCE disk is detected, t
 
     console=ttyS0,115200n8
 
-## Using without netboot.xyz (standard iPXE)
+## Using without pxe.to (standard iPXE)
 
 When building your script, you will want it to look something like this:
 

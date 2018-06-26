@@ -2,18 +2,18 @@
 
 **Experimental, haven't had a chance to run through this recently so YMMV.**
 
-The netboot.xyz ISO image can be used with OpenStack clouds to boot an instance
+The pxe.to ISO image can be used with OpenStack clouds to boot an instance
 and perform a custom installation of an operating system.
 
 ### Command line
 
 Start by downloading the ISO and then import it into glance:
 
-    $ wget https://boot.netboot.xyz/ipxe/netboot.xyz-dhcp.iso
-    $ glance image-create --name netboot.xyz \
+    $ wget https://boot.pxe.to/ipxe/pxe.to-dhcp.iso
+    $ glance image-create --name pxe.to \
         --disk-format iso \
         --container-format bare \
-        --file netboot.xyz-dhcp.iso \
+        --file pxe.to-dhcp.iso \
         --visibility public
     +------------------+--------------------------------------+
     | Property         | Value                                |
@@ -25,7 +25,7 @@ Start by downloading the ISO and then import it into glance:
     | id               | 4f11d49e-157b-4740-87ad-db7d59bb5d6d |
     | min_disk         | 0                                    |
     | min_ram          | 0                                    |
-    | name             | netboot.xyz                          |
+    | name             | pxe.to                          |
     | owner            | fbfce4cb346c4f9097a977c54904cafd     |
     | protected        | False                                |
     | size             | 1048576                              |
@@ -50,7 +50,7 @@ returned by glance and verify that the image imported successfully:
     | id               | 4f11d49e-157b-4740-87ad-db7d59bb5d6d |
     | min_disk         | 0                                    |
     | min_ram          | 0                                    |
-    | name             | netboot.xyz                          |
+    | name             | pxe.to                          |
     | owner            | fbfce4cb346c4f9097a977c54904cafd     |
     | protected        | False                                |
     | size             | 1048576                              |
@@ -76,17 +76,17 @@ Wait about 30 seconds, then request a console URL:
     nova get-spice-console c4ff017e-1234-4053-b740-e83eade277b9 spice-html5
 
 Open the console URL that nova returns and you should see the familiar
-netboot.xyz iPXE interface in the spice console!
+pxe.to iPXE interface in the spice console!
 
 ### Horizon
 
-Start by [downloading the netboot.xyz ISO](https://boot.netboot.xyz/ipxe/netboot.xyz-dhcp.iso)
+Start by [downloading the pxe.to ISO](https://boot.pxe.to/ipxe/pxe.to-dhcp.iso)
 to your local workstation.  Follow these steps to import the image into your
 OpenStack cloud using Horizon:
 
 * Click the _Compute_ tab on the left side, then click _Images_
 * Click _Create Image_ (top right)
-    * Name: `netboot.xyz ISO`
+    * Name: `pxe.to ISO`
     * Image Source: Image File
     * Image File: (browse to the ISO you downloaded)
     * Format: ISO - Optical Disk Image
@@ -96,7 +96,7 @@ OpenStack cloud using Horizon:
 
 Wait a moment for the status to become `active`. This should only take a few
 seconds.  To boot an instance with the ISO you uploaded, be sure to choose
-_Boot from image_ and select _netboot.xyz ISO_ from the drop down list.
+_Boot from image_ and select _pxe.to ISO_ from the drop down list.
 Configure networking and security groups as you normally would for any other
 instance.
 
@@ -104,5 +104,5 @@ When the instance has fully built and gone to active status, click on the
 instance name and then go to the _Console_ tab. Depending on your browser,
 you may need to click the link to show only the console.
 
-At that point, you should be able to view the netboot.xyz iPXE menu and install
+At that point, you should be able to view the pxe.to iPXE menu and install
 your operating system.
