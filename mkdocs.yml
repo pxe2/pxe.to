@@ -1,11 +1,11 @@
-site_name: netboot.xyz
-site_description: netboot.xyz uses iPXE to network boot Operating System installers and utilities from an easy to use menu.
-site_author: netboot.xyz
-site_url: https://netboot.xyz
-repo_url: https://github.com/antonym/netboot.xyz
-copyright: © 2018 <a href="https://twitter.com/@ntonym">Antony Messerli</a>
+site_name: pxe.to
+site_description: pxe.to uses iPXE to network boot Operating System installers and utilities from an easy to use menu.
+site_author: pxe.to
+site_url: https://pxe.to
+repo_url: https://github.com/pxe2/pxe.to
+copyright: © 2018 <a href="https://twitter.com/@PouliotPeter">Peter Pouliot</a>
 docs_dir: docs
-google_analytics: ['UA-68807-15', 'netboot.xyz']
+google_analytics: ['UA-121434457-1', 'pxe.to']
 pages:
 - Home: 'index.md'
 - Boot from...:
