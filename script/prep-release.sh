@@ -21,61 +21,61 @@ cd ipxe_build/src
 # get current iPXE hash
 IPXE_HASH=`git log -n 1 --pretty=format:"%H"`
 
-# generate netboot.xyz iPXE disks
+# generate pxe.to iPXE disks
 make bin/ipxe.dsk bin/ipxe.iso bin/ipxe.lkrn bin/ipxe.usb bin/ipxe.kpxe bin/undionly.kpxe \
-EMBED=../../ipxe/disks/netboot.xyz TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt
-mv bin/ipxe.dsk ../../build/ipxe/netboot.xyz.dsk
-mv bin/ipxe.iso ../../build/ipxe/netboot.xyz.iso
-mv bin/ipxe.lkrn ../../build/ipxe/netboot.xyz.lkrn
-mv bin/ipxe.usb ../../build/ipxe/netboot.xyz.usb
-mv bin/ipxe.kpxe ../../build/ipxe/netboot.xyz.kpxe
-mv bin/undionly.kpxe ../../build/ipxe/netboot.xyz-undionly.kpxe
+EMBED=../../ipxe/disks/pxe.to TRUST=ca-ipxe-org.crt,ca-pxe.to.crt
+mv bin/ipxe.dsk ../../build/ipxe/pxe.to.dsk
+mv bin/ipxe.iso ../../build/ipxe/pxe.to.iso
+mv bin/ipxe.lkrn ../../build/ipxe/pxe.to.lkrn
+mv bin/ipxe.usb ../../build/ipxe/pxe.to.usb
+mv bin/ipxe.kpxe ../../build/ipxe/pxe.to.kpxe
+mv bin/undionly.kpxe ../../build/ipxe/pxe.to-undionly.kpxe
 
-# generate netboot.xyz iPXE disk for Google Compute Engine
-make bin/ipxe.usb CONFIG=cloud EMBED=../../ipxe/disks/netboot.xyz-gce \
-TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt
+# generate pxe.to iPXE disk for Google Compute Engine
+make bin/ipxe.usb CONFIG=cloud EMBED=../../ipxe/disks/pxe.to-gce \
+TRUST=ca-ipxe-org.crt,ca-pxe.to.crt
 cp -f bin/ipxe.usb disk.raw
-tar Sczvf netboot.xyz-gce.tar.gz disk.raw
-mv netboot.xyz-gce.tar.gz ../../build/ipxe/netboot.xyz-gce.tar.gz
+tar Sczvf pxe.to-gce.tar.gz disk.raw
+mv pxe.to-gce.tar.gz ../../build/ipxe/pxe.to-gce.tar.gz
 
-# generate netboot.xyz-packet iPXE disk
+# generate pxe.to-packet iPXE disk
 make bin/undionly.kpxe \
-EMBED=../../ipxe/disks/netboot.xyz-packet TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt
-mv bin/undionly.kpxe ../../build/ipxe/netboot.xyz-packet.kpxe
+EMBED=../../ipxe/disks/pxe.to-packet TRUST=ca-ipxe-org.crt,ca-pxe.to.crt
+mv bin/undionly.kpxe ../../build/ipxe/pxe.to-packet.kpxe
 
 # generate EFI iPXE disks
 cp config/local/general.h.efi config/local/general.h
 make clean
 make bin-x86_64-efi/ipxe.efi \
-EMBED=../../ipxe/disks/netboot.xyz TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt
+EMBED=../../ipxe/disks/pxe.to TRUST=ca-ipxe-org.crt,ca-pxe.to.crt
 mkdir -p efi_tmp/EFI/BOOT/
 cp bin-x86_64-efi/ipxe.efi efi_tmp/EFI/BOOT/bootx64.efi
 genisoimage -o ipxe.eiso efi_tmp
-mv bin-x86_64-efi/ipxe.efi ../../build/ipxe/netboot.xyz.efi
-mv ipxe.eiso ../../build/ipxe/netboot.xyz-efi.iso
+mv bin-x86_64-efi/ipxe.efi ../../build/ipxe/pxe.to.efi
+mv ipxe.eiso ../../build/ipxe/pxe.to-efi.iso
 
 # generate EFI arm64 iPXE disk
 make clean
 make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 \
-EMBED=../../ipxe/disks/netboot.xyz TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt \
+EMBED=../../ipxe/disks/pxe.to TRUST=ca-ipxe-org.crt,ca-pxe.to.crt \
 bin-arm64-efi/snp.efi
-mv bin-arm64-efi/snp.efi ../../build/ipxe/netboot.xyz-arm64.efi
+mv bin-arm64-efi/snp.efi ../../build/ipxe/pxe.to-arm64.efi
 
-# generate netboot.xyz-packet-arm64 iPXE disk
+# generate pxe.to-packet-arm64 iPXE disk
 make clean
 make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 \
-EMBED=../../ipxe/disks/netboot.xyz-packet TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt \
+EMBED=../../ipxe/disks/pxe.to-packet TRUST=ca-ipxe-org.crt,ca-pxe.to.crt \
 bin-arm64-efi/snp.efi
-mv bin-arm64-efi/snp.efi ../../build/ipxe/netboot.xyz-packet-arm64.efi
+mv bin-arm64-efi/snp.efi ../../build/ipxe/pxe.to-packet-arm64.efi
 
 # generate arm64 experimental
 cp config/local/nap.h.efi config/local/nap.h
 cp config/local/usb.h.efi config/local/usb.h
 make clean
 make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 \
-EMBED=../../ipxe/disks/netboot.xyz TRUST=ca-ipxe-org.crt,ca-netboot-xyz.crt \
+EMBED=../../ipxe/disks/pxe.to TRUST=ca-ipxe-org.crt,ca-pxe.to.crt \
 bin-arm64-efi/snp.efi
-mv bin-arm64-efi/snp.efi ../../build/ipxe/netboot.xyz-arm64-experimental.efi
+mv bin-arm64-efi/snp.efi ../../build/ipxe/pxe.to-arm64-experimental.efi
 
 # return to root
 cd ../..
@@ -83,10 +83,10 @@ cd ../..
 # generate header for sha256-checksums file
 cd build/
 CURRENT_TIME=`date`
-cat > netboot.xyz-sha256-checksums.txt <<EOF
-# netboot.xyz bootloaders generated at $CURRENT_TIME
+cat > pxe.to-sha256-checksums.txt <<EOF
+# pxe.to bootloaders generated at $CURRENT_TIME
 # iPXE Commit: https://github.com/ipxe/ipxe/commit/$IPXE_HASH
-# Travis-CI Job: https://travis-ci.org/antonym/netboot.xyz/builds/$TRAVIS_BUILD_ID
+# Travis-CI Job: https://travis-ci.org/pxe2/pxe.to/builds/$TRAVIS_BUILD_ID
 
 EOF
 
@@ -94,18 +94,18 @@ EOF
 cd ipxe/
 for ipxe_disk in `ls .`
 do
-  sha256sum $ipxe_disk >> ../netboot.xyz-sha256-checksums.txt
+  sha256sum $ipxe_disk >> ../pxe.to-sha256-checksums.txt
 done
-cat ../netboot.xyz-sha256-checksums.txt
-mv ../netboot.xyz-sha256-checksums.txt .
+cat ../pxe.to-sha256-checksums.txt
+mv ../pxe.to-sha256-checksums.txt .
 cd ../..
 
-# generate signatures for netboot.xyz source files
+# generate signatures for pxe.to source files
 mkdir sigs
 for src_file in `ls src`
 do
   openssl cms -sign -binary -noattr -in src/$src_file \
-  -signer script/codesign.crt -inkey script/codesign.key -certfile script/ca-netboot-xyz.crt -outform DER \
+  -signer script/codesign.crt -inkey script/codesign.key -certfile script/ca-pxe.to.crt -outform DER \
   -out sigs/$src_file.sig
   echo Generated signature for $src_file...
 done
